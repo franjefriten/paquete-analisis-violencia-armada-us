@@ -80,6 +80,13 @@ df_merged = data_process.merge_datasets(df, file_uspop=os.path.join(CWD, RUTA_US
 
 df_merged = data_analyze.calculate_relative_values(df_merged)
 
+"""
+Observamos que la media ha variado bastante debido al proceso, ya que hemos
+sustituido un valor outlier por otro que se encuentra en los límites máximo y
+mínimo de las medias. De esta forma, un solo dato no representativo, no altera
+la tendencia general de las medias.
+"""
+
 ## EJERCICIO 5.5
 
 data_analyze.analyze_permit(df_merged)

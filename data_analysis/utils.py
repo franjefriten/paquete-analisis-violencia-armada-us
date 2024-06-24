@@ -39,12 +39,12 @@ def calculate_relative_values(df: pd.DataFrame):
 
 
 def analyze_permit(df_merged: pd.DataFrame):
-    media_permit_perc = df_merged.permit_perc.mean()
+    media_permit_perc = df_merged.permit_perc.mean().round(2)
     print("Media permit_perc:", media_permit_perc)
     print("Info Kentucky:", df_merged[df_merged.state == "Kentucky"])
     df_merged.loc[df_merged.state == "Kentucky", "permit_perc"] = media_permit_perc
     print("Media Kentucky alterada")
-    nueva_media_permit_perc = df_merged.permit_perc.mean()
+    nueva_media_permit_perc = df_merged.permit_perc.mean().round(2)
     print("Nueva media permit_perc:", nueva_media_permit_perc)
 
 
