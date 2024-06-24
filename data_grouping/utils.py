@@ -47,10 +47,11 @@ def print_biggest_longguns(df_grouped: pd.DataFrame) -> None:
     return None
 
 
-def groupby_state(df_grouped) -> pd.DataFrame:
+def groupby_state(df_grouped: pd.DataFrame) -> pd.DataFrame:
     """
-
-    :param df_grouped:
+    Esta función desagrupa un dataset agrupado por año y estado y lo reagrupa
+    solo por año
+    :param df_grouped: (pd.DataFrame) dataset agrupado por año y estado
     :return:
     """
     df = df_grouped.obj
@@ -58,7 +59,7 @@ def groupby_state(df_grouped) -> pd.DataFrame:
     df_aux = df.groupby("state")
     print("Dataset agrupado por state! \
     Imprimiendo valores totales por estado")
-    print(df_aux.sum().iloc[5, :])
+    print(df_aux.sum().iloc[:5, :])
     return df_aux
 
 

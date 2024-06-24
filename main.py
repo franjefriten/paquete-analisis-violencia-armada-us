@@ -83,3 +83,9 @@ df_merged = data_analyze.calculate_relative_values(df_merged)
 ## EJERCICIO 5.5
 
 data_analyze.analyze_permit(df_merged)
+
+## EJERCICIO 6
+
+data_analyze.create_choropleth_maps(df_merged, "permit_perc")
+data_analyze.create_choropleth_maps(df_merged, "longgun_perc")
+data_analyze.create_choropleth_maps(df_merged, "handgun_perc")

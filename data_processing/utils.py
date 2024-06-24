@@ -14,7 +14,7 @@ def breakdown_date(df: pd.DataFrame) -> pd.DataFrame:
     df["year"] = date.dt.year
     df["month."] = date.dt.month
     print("Columnas 'year' y 'month' creadas \n")
-    print(df.iloc[5, :])
+    print(df.iloc[:5, :])
     return df
 
 
@@ -31,7 +31,7 @@ def erase_month(df: pd.DataFrame) -> pd.DataFrame:
         df = df.rename(columns={"month.": "month"})
         print("Columnas alteradas exitosamente \n")
         print(f"Columnas: {df.columns} \n")
-        print(df.iloc[5, :])
+        print(df.iloc[:5, :])
         return df
 
 
@@ -40,5 +40,5 @@ def merge_datasets(df: pd.DataFrame, file_uspop: str):
     df_merged = pd.merge(df, df_us_pop, on='state')
     df_merged.reset_index()
     print("Datasets fusionados")
-    print(df_merged.iloc[5, ])
+    print(df_merged.iloc[:5, :])
     return df_merged

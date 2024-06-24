@@ -9,12 +9,11 @@ def read_csv(file: str) -> pd.DataFrame:
     """
     try:
         df = pd.read_csv(file)
-        print("Archivo cargado! \n")
-        print(df.iloc[5, :])
+        print(f"Archivo {file} cargado! \n")
+        print(df.iloc[:5, :])
         return df
     except FileNotFoundError as e:
         print(type(e).__name__, f"Archivo no encontrado en {file}")
-        return None
 
 
 def clean_csv(df: pd.DataFrame) -> pd.DataFrame:
@@ -25,13 +24,14 @@ def clean_csv(df: pd.DataFrame) -> pd.DataFrame:
     :return: (pd.DataFRame) dataframe pandas limpio
     """
     try:
-        df_clean = df.loc[:, ["month, state, permit, handgun, long_gun"]]
+        cols = ['month', 'state', 'permit', 'handgun', 'long_gun']
+        df_clean = df[cols]
         print("Dataset limpio! \n")
         print(df_clean.columns)
         return df_clean
     except KeyError:
-        print("Error en la limpieza del dataset")
-        return None
+        print(f"Error en la limpieza del dataset, \
+        columnas {cols} no encontradas en {df.columns}")
 
 
 def rename_cols(df: pd.DataFrame, oldcol: str, newcol: str) -> pd.DataFrame:
@@ -44,17 +44,18 @@ def rename_cols(df: pd.DataFrame, oldcol: str, newcol: str) -> pd.DataFrame:
     """
     if oldcol not in df.columns:
         raise KeyError(f"Columna {oldcol} no encontrada")
-        return None
     else:
         df = df.rename({oldcol: newcol})
         print(f"Columna {oldcol} cambiada a {newcol}")
+        print(df.columns)
         return df
+
 
 def clean_states(df_grouped: pd.DataFrame):
     df = df_grouped.obj
     not_states = ["Guam", "Virgin Islands", "Puerto Rico", "Mariana Islands"]
-    if not_states in df.state:
-        df = df[df.state in not_states, :]
-        return df
+    if any(map(lambda x: x in df.state.unique(), not_states)):
+        df = df.drop(df[df.state.isin(not_states)].index)
+        return df.groupby(by='state')
     else:
-        return None
+        return 0
